@@ -3,11 +3,18 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 export function activate(context: vscode.ExtensionContext) {
+    // ✅ Webview 등록
+    const provider = new CharenFileCleanerViewProvider(context.extensionUri);
     context.subscriptions.push(
-        vscode.window.registerWebviewViewProvider(
-            'file-cleaner.sidebar',
-            new CharenFileCleanerViewProvider(context.extensionUri)
-        )
+        vscode.window.registerWebviewViewProvider('file-cleaner.sidebar', provider)
+    );
+
+    // ✅ 명령어 등록
+    context.subscriptions.push(
+        vscode.commands.registerCommand('charen-extension.openFileCleaner', () => {
+            vscode.window.showInformationMessage("📂 File Cleaner 사이드바를 엽니다.");
+            vscode.commands.executeCommand("file-cleaner.sidebar.focus"); // 사이드바 열기
+        })
     );
 }
 
