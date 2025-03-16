@@ -1,0 +1,46 @@
+{
+    "name": "charen-extension",
+    "displayName": "Charen Extension",
+    "description": "A VS Code extension made by Charen",
+    "version": "1.0.0",
+    "publisher": "Charen",
+    "main": "./dist/extension.js",
+    "engines": {
+        "vscode": "^1.60.0"
+    },
+    "contributes": {
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "charen-tools",
+                    "title": "Charen Tools",
+                    "icon": "media/charen-icon.svg"
+                }
+            ]
+        },
+        "views": {
+            "charen-tools": [
+                {
+                    "id": "file-cleaner.sidebar",
+                    "name": "File Cleaner",
+                    "icon": "media/file-cleaner-icon.svg",
+                    "type": "webview"
+                }
+            ]
+        },
+        "commands": [
+            {
+                "command": "charen-extension.openFileCleaner",
+                "title": "Open File Cleaner Sidebar"
+            }
+        ]
+    },
+    "scripts": {
+        "compile": "tsc", 
+        "build": "tsc && vsce package"
+    },
+    "devDependencies": {
+        "typescript": "^4.5.0",
+        "vsce": "^2.9.0"
+    }
+}

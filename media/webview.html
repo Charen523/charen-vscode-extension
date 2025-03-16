@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>File Cleaner</title>
+        <link rel="stylesheet" type="text/css" href="./style.css">
+    </head>
+    <body>
+        <h3>삭제할 파일 확장자 입력</h3>
+        <input type="text" id="extensionInput" placeholder="ex: .exe, .cpp...">
+        <div class="button-container">
+            <button id="deleteButton">파일 삭제</button>
+        </div>
+
+        <script>
+            const vscode = acquireVsCodeApi();
+
+            document.addEventListener("DOMContentLoaded", () => {
+                const button = document.getElementById('deleteButton');
+                
+                button.addEventListener('click', () => {
+                    const extension = document.getElementById('extensionInput').value;
+
+                    console.log("📩 Sending message to extension:", extension); //TODO : 삭제
+                    
+                    vscode.postMessage({ command: 'charen-fileCleaner.deleteFiles', extension });
+                });
+            });
+
+            //TODO : 삭제
+            window.addEventListener('message', event => {
+                console.log("📨 Received message from extension:", event.data); 
+            });
+        </script>
+    </body>
+</html>
